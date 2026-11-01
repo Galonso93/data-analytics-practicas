@@ -15,10 +15,10 @@ id_producto INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 nombre_producto VARCHAR(100) NOT NULL, 
 categoria VARCHAR(50) NOT NULL, 
 precio_unitario DECIMAL(10,2) NOT NULL, 
-stock_actual INT NOT NULL, 
+stock_actual INT NOT NULL, -- Elegí el tipo INT porque son números los que usaré como stock_actual.
 stock_minimo INT NOT NULL, 
 fecha_ingreso DATE NOT NULL, 
-activo TINYINT NOT NULL
+activo TINYINT NOT NULL -- Elegí el tipo TINYINT porque necesito solo 1 y 0 para ver si es activo o no.
 );
 
 -- ── SECCIÓN DML ──────────────────────────
@@ -48,18 +48,18 @@ VALUES
 
 UPDATE inventario 
 SET stock_actual = stock_actual -3
-WHERE id_inventario = 1
+WHERE id_producto = 1
 
 UPDATE inventario 
 SET stock_actual = stock_actual -12
-WHERE id_inventario = 2
+WHERE id_producto = 2
 
 UPDATE inventario 
 SET stock_actual = stock_actual -5
-WHERE id_inventario = 6
+WHERE id_producto = 6
 
 UPDATE inventario
 SET activo = 0
-WHERE id_inventario = 8
+WHERE id_producto = 8
 
 SELECT * FROM inventario 
