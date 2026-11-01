@@ -11,14 +11,14 @@ USE Ejercicio_opcional_modulo3
 DROP TABLE IF EXISTS inventario
 
 CREATE TABLE inventario(
-id_inventario INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+id_producto INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
 nombre_producto VARCHAR(100) NOT NULL, 
 categoria VARCHAR(50) NOT NULL, 
 precio_unitario DECIMAL(10,2) NOT NULL, 
 stock_actual INT NOT NULL, 
 stock_minimo INT NOT NULL, 
 fecha_ingreso DATE NOT NULL, 
-activo TINYINT NOT NULL,
+activo TINYINT NOT NULL
 );
 
 -- ── SECCIÓN DML ──────────────────────────
