@@ -5,52 +5,52 @@ USE Ventas_tech_DB
 -- === SECCIÓN 1: DROP ===
 
 DROP TABLE IF EXISTS ventas;
-DROP TABLE IF EXISTS productos;
-DROP TABLE IF EXISTS clientes;
-DROP TABLE IF EXISTS categorias;
+DROP TABLE IF EXISTS producto;
+DROP TABLE IF EXISTS cliente;
+DROP TABLE IF EXISTS categoria;
 
 -- === SECCIÓN 2: CREATE TABLES ===
 
-CREATE TABLE categorias(
+CREATE TABLE categoria(
 id_categoria INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 nombre_categoria VARCHAR(50) NOT NULL,
-descripcion TEXT
+descripcion VARCHAR(200)
 );
 
-CREATE TABLE clientes(
-id_clientes INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE cliente(
+id_cliente INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 nombre VARCHAR(100) NOT NULL,
 email VARCHAR(100) UNIQUE,
 ciudad VARCHAR(50),
 fecha_registro DATE NOT NULL
 );
 
-CREATE TABLE productos(
-id_productos INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE producto(
+id_producto INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 nombre_producto VARCHAR(100) NOT NULL,
 id_categoria INT, 
 precio DECIMAL(10,2) NOT NULL,
 stock INT DEFAULT 0,
-activo INT DEFAULT 1,
+activo BIT DEFAULT 1,
 
-FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
+FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
 
-CREATE TABLE ventas(
-id_ventas INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-id_clientes INT,
-id_productos INT,
+CREATE TABLE venta(
+id_venta INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+id_cliente INT,
+id_producto INT,
 cantidad INT NOT NULL,
 precio_unitario DECIMAL(10,2) NOT NULL,
 fecha_venta DATE NOT NULL,
 
-FOREIGN KEY (id_clientes) REFERENCES clientes(id_clientes),
-FOREIGN KEY (id_productos) REFERENCES productos(id_productos)
+FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
 -- === SECCIÓN 3: INSERT INTO ===
 
-INSERT INTO categorias(
+INSERT INTO categoria(
 nombre_categoria, 
 descripcion) 
 
@@ -61,7 +61,7 @@ VALUES
   ('Almacenamiento','Discos y memorias'
   );
 
-INSERT INTO clientes(
+INSERT INTO cliente(
 nombre, 
 email, 
 ciudad, 
@@ -75,7 +75,7 @@ VALUES
   ('Laura Torres','laura@mail.com','Tucumán','2024-03-01'
   );
 
-INSERT INTO productos(
+INSERT INTO producto(
 nombre_producto,
 id_categoria,
 precio,
@@ -91,9 +91,9 @@ VALUES
   ('Teclado Mecánico',2,95.00,40,1
   );
 
- INSERT INTO ventas(
- id_clientes, 
- id_productos, 
+ INSERT INTO venta(
+ id_cliente, 
+ id_producto, 
  cantidad, 
  precio_unitario, 
  fecha_venta) 
@@ -113,7 +113,8 @@ VALUES
 
   -- === SECCIÓN 4: SELECT TABLES ===
 
-SELECT * FROM categorias;   -- esperado: 4 filas
-SELECT * FROM clientes;     -- esperado: 5 filas
-SELECT * FROM productos;    -- esperado: 6 filas
-SELECT * FROM ventas;       -- esperado: 10 filas
+SELECT * FROM categoria;   -- esperado: 4 filas
+SELECT * FROM cliente;     -- esperado: 5 filas
+SELECT * FROM producto;    -- esperado: 6 filas
+SELECT * FROM venta;       -- esperado: 10 filas
+;
