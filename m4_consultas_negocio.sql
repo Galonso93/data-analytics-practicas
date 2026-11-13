@@ -5,7 +5,7 @@ SELECT
 	SUM(cantidad * precio_unitario) AS Total_facturado,
 	COUNT(*) AS Cantidad_pedidos,
 	AVG(cantidad * precio_unitario) AS Ticket_promedio
-FROM venta
+FROM ventas
 GROUP BY MONTH(fecha_venta)
 ORDER BY Mes
 ;
@@ -15,7 +15,7 @@ ORDER BY Mes
 SELECT TOP 5 id_producto,
 	SUM(cantidad) AS Unidades_vendidas,
 	SUM(cantidad * precio_unitario) AS Total_facturado
-FROM venta
+FROM ventas
 GROUP BY id_producto
 ORDER BY Total_facturado DESC
 ;
@@ -25,7 +25,7 @@ ORDER BY Total_facturado DESC
 SELECT id_cliente,
 	COUNT(*) AS cantidad_pedidos,
 	SUM(cantidad * precio_unitario) AS total_gastado
-FROM venta
+FROM ventas
 GROUP BY id_cliente
 HAVING COUNT (*) > 1
 ;
@@ -35,7 +35,7 @@ HAVING COUNT (*) > 1
 WITH Facturacion_productos AS (
 	SELECT id_producto,
 		SUM(cantidad * precio_unitario) AS Total_facturado
-	FROM venta
+	FROM ventas
 	GROUP BY id_producto
 )
 
